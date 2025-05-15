@@ -43,12 +43,11 @@
             };
 
             try {
-                const response = await fetch('/api/register', {
+                const response = await fetch('http://127.0.0.1:8000/api/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify(formData)
                 });
@@ -59,7 +58,11 @@
                     alert('Registration successful!');
                     window.location.href = '/login';
                 } else {
-                    alert(data.message || 'Registration failed');
+                    let errorMsg = data.message || 'Registration failed';
+                    if (data.errors) {
+                        errorMsg += '\n' + Object.values(data.errors).flat().join('\n');
+                    }
+                    alert(errorMsg);
                 }
             } catch (error) {
                 console.error('Error:', error);
