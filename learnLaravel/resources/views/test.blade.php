@@ -55,8 +55,14 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    alert('Registration successful!');
-                    window.location.href = '/login';
+                    // Store user data in localStorage
+                    localStorage.setItem('registeredUser', JSON.stringify({
+                        id: data.user.id,
+                        name: formData.name,
+                        email: formData.email,
+                        password: formData.password
+                    }));
+                    window.location.href = "{{ url('/registration-success') }}";
                 } else {
                     let errorMsg = data.message || 'Registration failed';
                     if (data.errors) {
@@ -69,6 +75,8 @@
                 alert('An error occurred during registration');
             }
         });
+
+        localStorage.removeItem('registeredUser');
     </script>
 </body>
 </html>
