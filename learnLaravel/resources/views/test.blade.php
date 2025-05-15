@@ -6,6 +6,14 @@
     <title>Registration Form</title>
 </head>
 <body style="font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px;">
+    
+    <form action="/test" method="POST">
+        @csrf
+        <input type="text" name="first_name" placeholder="First Name">
+        <input type="text" name="last_name" placeholder="Last Name">
+        <button type="submit">Register</button>
+    </form>
+
     <div style="max-width: 500px; margin: 40px auto; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 20px;">
         <div style="text-align: center; margin-bottom: 30px;">
             <h3 style="color: #333; margin: 0; padding: 10px 0;">Register</h3>
